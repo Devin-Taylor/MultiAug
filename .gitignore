@@ -1,0 +1,4 @@
+dist/*
+multiaug/__pycache__/*
+
+MANIFEST
