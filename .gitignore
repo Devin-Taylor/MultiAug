@@ -1,4 +1,6 @@
 dist/*
 multiaug/__pycache__/*
+.vscode/*
 
 MANIFEST
+*.pyc
