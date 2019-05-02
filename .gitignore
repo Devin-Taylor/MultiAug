@@ -1,6 +1,7 @@
 dist/*
 multiaug/__pycache__/*
 .vscode/*
+MultiAug.egg-info/*
 
 MANIFEST
 *.pyc
