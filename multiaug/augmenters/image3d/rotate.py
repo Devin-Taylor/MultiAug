@@ -1,20 +1,22 @@
+from typing import Union
+
 import multiaug.augmenters.meta as meta
 import numpy as np
 import scipy.ndimage
 
 
-def _generate_bool_sequence(num, random_state):
+def _generate_bool_sequence(num: int, random_state: int) -> list:
     return [random_state.choice([True, False], 1)[0] for _ in range(num)]
 
-def _merge_bool_sequences(proposed, mask):
+def _merge_bool_sequences(proposed: list, mask: list) -> list:
     return [x and y for x, y in zip(proposed, mask)]
 
-def _validate_angle(angle):
+def _validate_angle(angle: Union[int, float]):
     assert (angle >= 0 and angle <= 360), "Angle not within valid range [0, 360], received {}".format(angle)
 
-class Resize3d(meta.Augmenter):
-    def __init__(self, angle, interpolation='nearest', rotate_x=True, rotate_y=True, rotate_z=True):
-        super(Resize3d, self).__init__()
+class Rotate3d(meta.Augmenter):
+    def __init__(self, angle: Union[int, float, list], interpolation: str = 'nearest', rotate_x: bool = True, rotate_y: bool = True, rotate_z: bool = True):
+        super(Rotate3d, self).__init__()
 
         if isinstance(angle, list):
             assert len(angle) == 3, "Please specify rotation angle for x, y and z dimensions, only {} angles provided".format(len(angle))
@@ -34,7 +36,7 @@ class Resize3d(meta.Augmenter):
         if sum(self.active_axes) == 0:
             raise RuntimeError("All axes have been deactivated, please activate atleast one axes for augmentation to take place")
 
-    def apply_to_batch(self, images, row_ids):
+    def apply_to_batch(self, images: np.ndarray, row_ids: list) -> np.ndarray:
 
         rotated_images = []
         for image in images[row_ids]:
@@ -42,7 +44,7 @@ class Resize3d(meta.Augmenter):
 
         return np.array(rotated_images)
 
-    def apply(self, image):
+    def apply(self, image: np.ndarray) -> np.ndarray:
         which_axes = _generate_bool_sequence(3, self.random_state)
         which_axes = _merge_bool_sequences(which_axes, self.active_axes)
 
