@@ -18,7 +18,7 @@ class TestIntegration(unittest.TestCase):
         data = np.zeros((10, 10))
         data[0, :] = 1
         labels = np.ones(10)
-        new_data, new_labels = augmenter.apply_tablular(data, labels)
+        new_data, new_labels = augmenter.apply_tabular(data, labels)
         self.assertEqual(len(new_labels), 12)
         self.assertEqual(len(new_data), 12)
 
@@ -31,7 +31,7 @@ class TestIntegration(unittest.TestCase):
         tabular[0, :] = 1
         labels = np.ones(10)
         new_images, new_labels = augmenter.apply_image3d(images, labels)
-        new_tabular, _ = augmenter.apply_tablular(tabular, labels)
+        new_tabular, _ = augmenter.apply_tabular(tabular, labels)
         self.assertEqual(len(new_labels), 12)
         self.assertEqual(len(new_images), 12)
         self.assertEqual(len(new_tabular), 12)
@@ -45,7 +45,7 @@ class TestIntegration(unittest.TestCase):
         tabular[6, :] = 1
         labels = np.ones(10)
         new_images, new_labels = augmenter.apply_image3d(images, labels)
-        new_tabular, _ = augmenter.apply_tablular(tabular, labels)
+        new_tabular, _ = augmenter.apply_tabular(tabular, labels)
 
         self.assertEqual(1000, sum(np.isclose(images[augmenter.indices[0]].flatten(), new_images[-1, :].flatten())))
         self.assertEqual(10, sum(np.isclose(tabular[augmenter.indices[0]].flatten(), new_tabular[-1, :].flatten())))

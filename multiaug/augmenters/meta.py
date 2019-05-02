@@ -57,7 +57,7 @@ class OneOf(Augmenter):
 
         return images, labels
 
-    def apply_tablular(self, data: np.ndarray, labels: np.ndarray = None) -> Tuple[np.ndarray, np.ndarray]:
+    def apply_tabular(self, data: np.ndarray, labels: np.ndarray = None) -> Tuple[np.ndarray, np.ndarray]:
         assert self.tabular_transforms is not None, "No transformations available to apply for tabular"
         num_transforms = len(self.tabular_transforms)
 

@@ -1,6 +1,7 @@
 import numpy as np
 
-import multiaug.augmenters.meta as meta
+import multiaug.augmenters
+from multiaug.augmenters import meta
 
 
 class GaussianPerturbation(meta.Augmenter):

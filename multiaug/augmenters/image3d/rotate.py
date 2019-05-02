@@ -1,6 +1,8 @@
 from typing import Union
 
-import multiaug.augmenters.meta as meta
+import multiaug
+from multiaug.augmenters import meta
+
 import numpy as np
 import scipy.ndimage
 
