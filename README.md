@@ -8,6 +8,12 @@ MultiAug is a multi-modal data augmentation library for use in machine learning.
 
 Functionally, the library presents a similar API to [imgaug](https://github.com/aleju/imgaug) python library
 
+## Install
+
+```
+pip install MultiAug
+```
+
 ## Current Features
 
 3D image augmentation

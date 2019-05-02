@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='MultiAug',
-    version='0.1.15',
+    version='0.1.16',
     author='Devin Taylor',
     author_email='dev.t03@gmail.com',
     packages=find_packages(),
