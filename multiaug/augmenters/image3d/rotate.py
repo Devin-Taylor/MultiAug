@@ -1,10 +1,9 @@
 from typing import Union
 
 import multiaug
-from multiaug.augmenters import meta
-
 import numpy as np
 import scipy.ndimage
+from multiaug.augmenters import meta
 
 
 def _generate_bool_sequence(num: int, random_state: int) -> list:
@@ -17,6 +16,29 @@ def _validate_angle(angle: Union[int, float]):
     assert (angle >= 0 and angle <= 360), "Angle not within valid range [0, 360], received {}".format(angle)
 
 class Rotate3d(meta.Augmenter):
+    '''
+    Apply random rotation to 3D images.
+
+    Parameters
+    ----------
+    angle : int or float or list
+        The maximum angle by which to rotate the image.
+
+            * If 'int' or 'float' then use the angle specified for all axes.
+            * If 'list' then must be of format [angle_x, angle_y, angle_z].
+
+    interpolation : str
+        Interpolation method to use.
+
+            * If 'nearest' then use nearest interpolation.
+
+    rotate_x : bool
+        Allow rotation about the x-axis
+    rotate_y : bool
+        Allow rotation about the y-axis
+    rotate_z : bool
+        Allow rotation about the z-axis
+    '''
     def __init__(self, angle: Union[int, float, list], interpolation: str = 'nearest', rotate_x: bool = True, rotate_y: bool = True, rotate_z: bool = True):
         super(Rotate3d, self).__init__()
 
@@ -39,7 +61,22 @@ class Rotate3d(meta.Augmenter):
             raise RuntimeError("All axes have been deactivated, please activate atleast one axes for augmentation to take place")
 
     def apply_to_batch(self, images: np.ndarray, row_ids: list) -> np.ndarray:
+        '''
+        Apply transformations to an entire batch.
 
+        Parameters
+        ----------
+        images : np.ndarray
+            Image batch of shape N x H x W x D.
+
+        row_ids : list
+            Indices of rows to rotate.
+
+        Returns
+        -------
+        np.ndarray
+            Batch of rotated images.
+        '''
         rotated_images = []
         for image in images[row_ids]:
             rotated_images.append(self.apply(image))
@@ -47,6 +84,20 @@ class Rotate3d(meta.Augmenter):
         return np.array(rotated_images)
 
     def apply(self, image: np.ndarray) -> np.ndarray:
+        '''
+        Apply transformation to a single image. Randomly samples one or more active axes and applies
+        a random rotation about that axes.
+
+        Parameters
+        ----------
+        image : np.ndarray
+            Image to transform.
+
+        Returns
+        -------
+        np.ndarray
+            Rotated image.
+        '''
         which_axes = _generate_bool_sequence(3, self.random_state)
         which_axes = _merge_bool_sequences(which_axes, self.active_axes)
 
