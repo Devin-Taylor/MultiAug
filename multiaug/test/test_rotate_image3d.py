@@ -21,14 +21,14 @@ class TestRotate3d(unittest.TestCase):
         self.assertRaises(AssertionError, aug.image3d_augmenters.rotate._validate_angle, 361)
 
     def test_validate_active_axes(self):
-        _ = aug.image3d_augmenters.Rotate3d(10, 'nearest', False, False, True)
-        _ = aug.image3d_augmenters.Rotate3d(10, 'nearest', False, True, False)
-        _ = aug.image3d_augmenters.Rotate3d(10, 'nearest', True, False, False)
-        _ = aug.image3d_augmenters.Rotate3d(10, 'nearest', True, True, False)
-        _ = aug.image3d_augmenters.Rotate3d(10, 'nearest', True, False, True)
-        _ = aug.image3d_augmenters.Rotate3d(10, 'nearest', False, True, True)
-        _ = aug.image3d_augmenters.Rotate3d(10, 'nearest', True, True, True)
-        self.assertRaises(RuntimeError, aug.image3d_augmenters.Rotate3d, 10, 'nearest', False, False, False)
+        _ = aug.image3d_augmenters.Rotate3d(10, [False, False, True], 'nearest')
+        _ = aug.image3d_augmenters.Rotate3d(10, [False, True, False], 'nearest')
+        _ = aug.image3d_augmenters.Rotate3d(10, [True, False, False], 'nearest')
+        _ = aug.image3d_augmenters.Rotate3d(10, [True, True, False], 'nearest')
+        _ = aug.image3d_augmenters.Rotate3d(10, [True, False, True], 'nearest')
+        _ = aug.image3d_augmenters.Rotate3d(10, [False, True, True], 'nearest')
+        _ = aug.image3d_augmenters.Rotate3d(10, [True, True, True], 'nearest')
+        self.assertRaises(RuntimeError, aug.image3d_augmenters.Rotate3d, 10, [False, False, False], 'nearest')
 
     def test_merge_bool_sequences(self):
         a = [True, True, True]
@@ -41,17 +41,17 @@ class TestRotate3d(unittest.TestCase):
         self.assertListEqual(result, aug.image3d_augmenters.rotate._merge_bool_sequences(a, mask))
 
     def test_rotated_image_different(self):
-        augmenter = aug.image3d_augmenters.Rotate3d(10, 'nearest', False, False, True)
+        augmenter = aug.image3d_augmenters.Rotate3d(10, [False, False, True], 'nearest')
 
         data = np.zeros((10, 10, 10))
         data[0, :, 0] = 1
-        result = augmenter.apply(data)
+        result = augmenter.apply_to_sample(data)
         self.assertFalse(np.array_equal(data, result))
 
     def test_batching_generates_correct_sample_numbers(self):
-        augmenter = aug.image3d_augmenters.Rotate3d(10, 'nearest', False, False, True)
+        augmenter = aug.image3d_augmenters.Rotate3d(10, [False, False, True], 'nearest')
         data = np.zeros((10, 10, 10, 10))
-        result = augmenter.apply_to_batch(data, [0, 1, 2])
+        result = augmenter.apply(data, [0, 1, 2])
         self.assertEqual(result.shape[0], 3)
 
 

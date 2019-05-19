@@ -102,7 +102,7 @@ class OneOf(Augmenter):
 
         original_images = images.copy()
         for transform, row_ids in tsf_to_sample.items():
-            aug_images = self.image3d_transforms[transform].apply_to_batch(original_images, row_ids)
+            aug_images = self.image3d_transforms[transform].apply(original_images, row_ids)
             if len(aug_images.shape) == 3: # if only single image
                 aug_images = np.expand_dims(aug_images, axis=0)
             images = np.concatenate((images, aug_images), axis=0)

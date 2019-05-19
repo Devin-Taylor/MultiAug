@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Union, Tuple
 
 import multiaug
 import numpy as np
@@ -27,19 +27,18 @@ class Rotate3d(meta.Augmenter):
             * If 'int' or 'float' then use the angle specified for all axes.
             * If 'list' then must be of format [angle_x, angle_y, angle_z].
 
+    axes : list
+        Flags for the x, y, z axes that determine which axes the image can be rotated about.
+
+            * If 'True' then axis can be rotated about
+            * If 'False' then axis cannot be rotated about
+
     interpolation : str
         Interpolation method to use.
 
             * If 'nearest' then use nearest interpolation.
-
-    rotate_x : bool
-        Allow rotation about the x-axis
-    rotate_y : bool
-        Allow rotation about the y-axis
-    rotate_z : bool
-        Allow rotation about the z-axis
     '''
-    def __init__(self, angle: Union[int, float, list], interpolation: str = 'nearest', rotate_x: bool = True, rotate_y: bool = True, rotate_z: bool = True):
+    def __init__(self, angle: Union[int, float, list], axes: Tuple[bool, bool, bool] = [True, True, True], interpolation: str = 'nearest'):
         super(Rotate3d, self).__init__()
 
         if isinstance(angle, list):
@@ -55,12 +54,12 @@ class Rotate3d(meta.Augmenter):
         _validate_angle(self.z_max)
 
         self.interpolation = interpolation
-        self.active_axes = [rotate_x, rotate_y, rotate_z]
+        self.active_axes = axes
 
         if sum(self.active_axes) == 0:
             raise RuntimeError("All axes have been deactivated, please activate atleast one axes for augmentation to take place")
 
-    def apply_to_batch(self, images: np.ndarray, row_ids: list) -> np.ndarray:
+    def apply(self, images: np.ndarray, row_ids: list) -> np.ndarray:
         '''
         Apply transformations to an entire batch.
 
@@ -79,11 +78,11 @@ class Rotate3d(meta.Augmenter):
         '''
         rotated_images = []
         for image in images[row_ids]:
-            rotated_images.append(self.apply(image))
+            rotated_images.append(self.apply_to_sample(image))
 
         return np.array(rotated_images)
 
-    def apply(self, image: np.ndarray) -> np.ndarray:
+    def apply_to_sample(self, image: np.ndarray) -> np.ndarray:
         '''
         Apply transformation to a single image. Randomly samples one or more active axes and applies
         a random rotation about that axes.
