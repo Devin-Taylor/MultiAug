@@ -26,6 +26,8 @@ Tabular data augmentation
 
 ## API
 
+Full documentation available [here](https://multiaug.readthedocs.io/en/latest/index.html)
+
 Operators:
 
 * The `OneOf()` method with apply one of the transformations provided in the list to the corresponding modality

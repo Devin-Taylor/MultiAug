@@ -1,0 +1,249 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>multiaug.augmenters.tabular package &mdash; MultiAug 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> MultiAug
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">multiaug.augmenters.tabular package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-multiaug.augmenters.tabular.gaussian_perturbation">multiaug.augmenters.tabular.gaussian_perturbation module</a></li>
+<li><a class="reference internal" href="#module-multiaug.augmenters.tabular">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MultiAug</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>multiaug.augmenters.tabular package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/multiaug.augmenters.tabular.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="multiaug-augmenters-tabular-package">
+<h1>multiaug.augmenters.tabular package<a class="headerlink" href="#multiaug-augmenters-tabular-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-multiaug.augmenters.tabular.gaussian_perturbation">
+<span id="multiaug-augmenters-tabular-gaussian-perturbation-module"></span><h2>multiaug.augmenters.tabular.gaussian_perturbation module<a class="headerlink" href="#module-multiaug.augmenters.tabular.gaussian_perturbation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="multiaug.augmenters.tabular.gaussian_perturbation.GaussianPerturbation">
+<em class="property">class </em><code class="sig-prename descclassname">multiaug.augmenters.tabular.gaussian_perturbation.</code><code class="sig-name descname">GaussianPerturbation</code><span class="sig-paren">(</span><em class="sig-param">method: str = 'variance'</em>, <em class="sig-param">fraction: float = 0.1</em><span class="sig-paren">)</span><a class="headerlink" href="#multiaug.augmenters.tabular.gaussian_perturbation.GaussianPerturbation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="multiaug.augmenters.html#multiaug.augmenters.meta.Augmenter" title="multiaug.augmenters.meta.Augmenter"><code class="xref py py-class docutils literal notranslate"><span class="pre">multiaug.augmenters.meta.Augmenter</span></code></a></p>
+<p>Apply featurewise Gaussian noise to each feature in a sample.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>method</strong> (<em>str</em>) – <p>Method to use to determine the noise (currently variance is the only supported method).</p>
+<blockquote>
+<div><ul>
+<li><p>If ‘variance’ then the noise is determined by taking a fraction
+of the variance (across the individual features) for each feature
+and adding it the the original feature.</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>fraction</strong> (<em>float</em>) – Fraction of noise to add to sample.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="multiaug.augmenters.tabular.gaussian_perturbation.GaussianPerturbation.apply">
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param">data: numpy.ndarray</em>, <em class="sig-param">row_ids: numpy.ndarray</em><span class="sig-paren">)</span><a class="headerlink" href="#multiaug.augmenters.tabular.gaussian_perturbation.GaussianPerturbation.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply the augmentation to the samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>np.ndarray</em>) – Entire dataset such that the noise can be determined relative to the entire dataset.</p></li>
+<li><p><strong>row_ids</strong> (<em>np.ndarray</em>) – The indices of the samples to which to apply noise.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Augmented data</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-multiaug.augmenters.tabular">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-multiaug.augmenters.tabular" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Devin Taylor
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
